@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Exercicio8 {
+public class Exercicio08 {
     public static void main(String[] args) {
         double alturaDoRetangulo, baseDoRetangulo, areaDoRetangulo;
         Scanner scanner = new Scanner(System.in);

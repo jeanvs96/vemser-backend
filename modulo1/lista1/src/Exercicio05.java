@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Exercicio5 {
+public class Exercicio05 {
     public static void main(String[] args) {
         double valorPorHora, horasNormaisTrabalhadas, horasExtras50, horasExtras100, salarioBruto;
         Scanner scanner = new Scanner(System.in);

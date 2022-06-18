@@ -1,4 +1,4 @@
-public class Exercicio7 {
+public class Exercicio07 {
     public static void main(String[] args) {
         Integer valor1 = 10, valor2 = 20, aux;
         aux = valor1;

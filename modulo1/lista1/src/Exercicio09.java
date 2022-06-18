@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Exercicio9 {
+public class Exercicio09 {
     public static void main(String[] args) {
         Integer idadeAnos, idadeMeses, idadeDias, idadeEmDiasTotal;
         Scanner scanner = new Scanner(System.in);
