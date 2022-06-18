@@ -19,5 +19,6 @@ public class Exercicio1 {
 
         System.out.println("Olá seu nome é " + nome + ", você tem " + idade + " anos, é da cidade " + cidade  +
                         ", situada no estado de " + estado + ".");
+        scanner.close();
     }
 }
