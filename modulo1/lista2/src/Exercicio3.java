@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Exercicio3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String nome = null, nomeDoMaisPesado = null;
+        String nome = null, nomeDoMaisPesado = null, nomeDoMaisAlto = null;
         Double altura, peso, alturaDoMaisAlto = 0.0, mediaDasAlturas = 0.0, pesoDoMaisPesado = 0.0;
         Integer idade, quantidadeDeJogadores = 0, idadeDoMaisVelho = 0;
 
@@ -27,7 +27,7 @@ public class Exercicio3 {
                 alturaDoMaisAlto = altura;
             }
             if(idade > idadeDoMaisVelho) {
-                idadeDoMaisVelho = idade;
+                nomeDoMaisAlto = nome;
             }
             if(peso > pesoDoMaisPesado) {
                 pesoDoMaisPesado = peso;
@@ -40,7 +40,7 @@ public class Exercicio3 {
 
         System.out.format("Quantidade de jogadores cadastrados: " + quantidadeDeJogadores
                 + "\nAltura do maior jogador: " + alturaDoMaisAlto
-                + "\nJogador mais velho: " + idadeDoMaisVelho
+                + "\nJogador mais velho: " + nomeDoMaisAlto
                 + "\nJogador mais pesado: " + nomeDoMaisPesado
                 + "\nMédia das alturas: %.2f", mediaDasAlturas);
     }
