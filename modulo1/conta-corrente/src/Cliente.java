@@ -16,6 +16,6 @@ public class Cliente {
     }
 
     public void imprimirCliente() {
-        System.out.println("CLIENTE\n" + this.nome + "\n" + this.cpf);
+        System.out.println("CLIENTE\n" + this.nome + "\nCPF: " + this.cpf);
     }
 }

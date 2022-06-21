@@ -5,12 +5,12 @@ public class Contato {
     public void imprimirContato() {
         switch (this.tipo) {
             case 1 -> {
-                System.out.println("Tipo: Residencial \n" + "Telefone: " + this.telefone
-                        + "\nDescrição: " + this.descricao);
+                System.out.println("CONTATO Tipo: Residencial \n" + "Telefone: " + this.telefone
+                        + "\nDescrição: " + this.descricao + "\n");
             }
             case 2 -> {
-                System.out.println("Tipo: Comercial \n" + "Telefone: " + this.telefone
-                        + "\nDescrição: " + this.descricao);
+                System.out.println("CONTATO Tipo: Comercial \n" + "Telefone: " + this.telefone
+                        + "\nDescrição: " + this.descricao + "\n");
             }
             default -> {
                 System.out.println("Contato não encontrado.");

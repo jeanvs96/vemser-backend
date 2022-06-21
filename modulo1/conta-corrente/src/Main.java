@@ -74,7 +74,7 @@ public class Main {
         contaHeleniceDaSilva.saldo = 200000.0;
         contaHeleniceDaSilva.chequeEspecial = 10000.0;
 
-        //Testes:
+        //TESTES ContaCorrente:
 
         contaJeanVictorDaSilva.imprimirContaCorrente();
         System.out.println();
@@ -101,5 +101,13 @@ public class Main {
         System.out.println();
         contaHeleniceDaSilva.imprimirContaCorrente();
         System.out.println();
+
+        //TESTES MÉTODOS RESTANTES
+        jean.imprimirCliente();
+        System.out.println();
+        jean.imprimirContatos();
+        System.out.println();
+        jean.imprimirEnderecos();
+
     }
 }

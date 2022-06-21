@@ -5,16 +5,16 @@ public class Endereco {
     public void imprimirEndereco() {
         switch (this.tipo) {
             case 1 -> {
-                System.out.println("Tipo: Residencial" + "Rua: " + this.logradouro
-                        + "Número: " + numero + "\nComplemento: " + this.complemento
+                System.out.println("ENDEREÇO Tipo: Residencial" + "\nRua: " + this.logradouro
+                        + "\nNúmero: " + numero + "\nComplemento: " + this.complemento
                         + "\nCEP: " + this.cep + "\nCidade: " + this.cidade
-                        + "\nEstado: " + this.estado + "\nPaís: " + this.pais);
+                        + "\nEstado: " + this.estado + "\nPaís: " + this.pais + "\n");
             }
             case 2 -> {
-                System.out.println("Tipo: Comercial" + "Rua: " + this.logradouro
-                        + "Número: " + numero + "\nComplemento: " + this.complemento
+                System.out.println("ENDEREÇO Tipo: Comercial" + "\nRua: " + this.logradouro
+                        + "\nNúmero: " + numero + "\nComplemento: " + this.complemento
                         + "\nCEP: " + this.cep + "\nCidade: " + this.cidade
-                        + "\nEstado: " + this.estado + "\nPaís: " + this.pais);
+                        + "\nEstado: " + this.estado + "\nPaís: " + this.pais + "\n");
             }
             default -> {
                 System.out.println("Endereço não encontrado.");
