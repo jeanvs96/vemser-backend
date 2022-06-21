@@ -20,5 +20,6 @@ public class Exercicio2 {
                 System.out.println("O número a ser encontrado é maior do que você digitou!");
             }
         }
+        scanner.close();
     }
 }

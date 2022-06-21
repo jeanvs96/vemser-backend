@@ -15,6 +15,7 @@ public class Exercicio7 {
                 }
             }
         }
+        scanner.close();
         System.out.println("A matriz possui " + quantidadeAcimaDeDez + " valores maiores que 10.");
     }
 }

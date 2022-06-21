@@ -35,6 +35,7 @@ public class Exercicio3 {
             }
             mediaDasAlturas += altura;
         }
+        scanner.close();
         mediaDasAlturas /= quantidadeDeJogadores;
 
         System.out.format("Quantidade de jogadores cadastrados: " + quantidadeDeJogadores

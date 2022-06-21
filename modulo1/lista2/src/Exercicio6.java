@@ -9,6 +9,7 @@ public class Exercicio6 {
 
         System.out.println("Informe o número para conferir se existe no vetor: ");
         numeroParaConferir = scanner.nextInt();
+        scanner.close();
         for (int i = 0; i < numeros.length; i++) {
             if(numeros[i].equals(numeroParaConferir)) {
                 System.out.println("Número encontrado na posição: " + i + " do vetor 'numeros'");

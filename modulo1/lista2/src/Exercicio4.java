@@ -14,6 +14,7 @@ public class Exercicio4 {
                 controle = numeros[i];
             }
         }
+        scanner.close();
         System.out.println("A posição do menor valor é: " + posicaoDoMenor);
     }
 }
