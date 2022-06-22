@@ -102,12 +102,5 @@ public class Main {
         contaHeleniceDaSilva.imprimirContaCorrente();
         System.out.println();
 
-        //TESTES MÉTODOS RESTANTES
-        jean.imprimirCliente();
-        System.out.println();
-        jean.imprimirContatos();
-        System.out.println();
-        jean.imprimirEnderecos();
-
     }
 }

@@ -5,9 +5,13 @@ public class ContaCorrente {
     Double saldo, chequeEspecial;
 
     public void imprimirContaCorrente() {
-        System.out.println("Cliente: " + this.cliente.nome + "\nAgência: " + this.agencia
+        this.cliente.imprimirCliente();
+        System.out.println("Agência: " + this.agencia
                 + "\nConta: " + this.numeroConta + "\nSaldo: " + this.saldo
                 + "\nLimite de Cheque Especial: " + this.chequeEspecial);
+        this.cliente.imprimirContatos();
+        this.cliente.imprimirEnderecos();
+        System.out.println("----------------------------------------------------");
     }
 
     public boolean sacar(double valorDoSaque) {
