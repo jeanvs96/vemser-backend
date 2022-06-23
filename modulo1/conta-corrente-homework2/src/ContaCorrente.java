@@ -31,16 +31,6 @@ public class ContaCorrente extends Conta implements Impressao{
         return false;
     }
 
-    @Override
-    public boolean transferir(Conta conta, double valorDaTransferencia) {
-        if(valorDaTransferencia <= this.retornarSaldoComChequeEspecial() && valorDaTransferencia > 0) {
-            this.setSaldo(this.getSaldo() - valorDaTransferencia);
-            conta.setSaldo(conta.getSaldo() + valorDaTransferencia);
-            return true;
-        }
-        return false;
-    }
-
     public double retornarSaldoComChequeEspecial() {
         return this.getSaldo() + this.chequeEspecial;
     }

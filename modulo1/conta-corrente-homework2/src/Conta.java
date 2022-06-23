@@ -55,8 +55,8 @@ public abstract class Conta implements Movimentacao {
     @Override
     public boolean transferir(Conta conta, double valorDaTransferencia) {
         if(valorDaTransferencia <= this.getSaldo() && valorDaTransferencia > 0) {
-            this.setSaldo(this.getSaldo() - valorDaTransferencia);
-            conta.setSaldo(conta.getSaldo() + valorDaTransferencia);
+            this.sacar(valorDaTransferencia);
+            conta.depositar(valorDaTransferencia);
             return true;
         }
         return false;
