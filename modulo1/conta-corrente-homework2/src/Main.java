@@ -15,9 +15,9 @@ public class Main {
 
         Contato heleniceContato1 = new Contato(1, "Disponível das 17h as 21h", "11999995555");
         Contato heleniceContato2 = new Contato(2, "Disponível das 8h as 16h", "1155553322");
-        Endereco heleniceEndereco1 = new Endereco(1, 1, "Rua das Rosas",
+        Endereco heleniceEndereco1 = new Endereco(1, 115, "Rua das Rosas",
                 "Apartamento 45", "03447110", "São Paulo", "São Paulo", "Brasil");
-        Endereco heleniceEndereco2 = new Endereco(2, 2, "Rua das Máquinas",
+        Endereco heleniceEndereco2 = new Endereco(2, 1559, "Rua das Máquinas",
                 "35° Andar", "05205040", "São Paulo", "São Paulo", "Brasil");
         Cliente helenice = new Cliente("Helenice Accioly", "73150576091", heleniceContato1,
                 heleniceContato2, heleniceEndereco1, heleniceEndereco2);

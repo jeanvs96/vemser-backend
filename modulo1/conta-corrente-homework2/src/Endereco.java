@@ -81,13 +81,13 @@ public class Endereco {
     public void imprimirEndereco() {
         switch (this.tipo) {
             case 1 -> {
-                System.out.println("ENDEREÇO Tipo: Residencial" + "\nRua: " + this.logradouro
+                System.out.println("ENDEREÇO \nTipo: Residencial" + "\nRua: " + this.logradouro
                         + "\nNúmero: " + numero + "\nComplemento: " + this.complemento
                         + "\nCEP: " + this.cep + "\nCidade: " + this.cidade
                         + "\nEstado: " + this.estado + "\nPaís: " + this.pais + "\n");
             }
             case 2 -> {
-                System.out.println("ENDEREÇO Tipo: Comercial" + "\nRua: " + this.logradouro
+                System.out.println("ENDEREÇO \nTipo: Comercial" + "\nRua: " + this.logradouro
                         + "\nNúmero: " + numero + "\nComplemento: " + this.complemento
                         + "\nCEP: " + this.cep + "\nCidade: " + this.cidade
                         + "\nEstado: " + this.estado + "\nPaís: " + this.pais + "\n");
