@@ -24,4 +24,13 @@ public class ContaPagamento extends Conta implements Impressao{
         }
         return false;
     }
+
+    @Override
+    public boolean transferir(Conta conta, double valorDaTransferencia) {
+        if(valorDaTransferencia <= this.getSaldo() && valorDaTransferencia > 0) {
+            this.setSaldo(this.getSaldo() - valorDaTransferencia);
+            conta.depositar(valorDaTransferencia);
+        }
+        return false;
+    }
 }

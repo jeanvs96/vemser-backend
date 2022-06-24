@@ -53,7 +53,7 @@ public class Main {
         System.out.println("Transferencia inválida: " + contaHelenice.transferir(contaJean,-1500.0) + "\n");
 
         //Transferindo 1000 de Conta Pagamento para Conta Corrente e Conta Poupança
-        System.out.println("Transferindo 500 de Conta Pagamento para Conta Corrente e Conta Poupança");
+        System.out.println("Transferindo 1000 de Conta Pagamento para Conta Corrente e Conta Poupança");
         contaPagamentoJean.transferir(contaJean, 1000);
         contaPagamentoJean.transferir(contaHelenice, 1000);
         System.out.println("Saldo CP Helenice: " + contaHelenice.getSaldo());
