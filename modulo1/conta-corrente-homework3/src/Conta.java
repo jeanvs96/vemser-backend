@@ -50,7 +50,7 @@ public abstract class Conta implements Movimentacao {
             return true;
         }
         return false;
-    };
+    }
 
     @Override
     public boolean transferir(Conta conta, double valorDaTransferencia) {
@@ -68,6 +68,4 @@ public abstract class Conta implements Movimentacao {
         }
         return false;
     }
-
-
 }
