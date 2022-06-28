@@ -8,10 +8,10 @@ public class Main {
         Endereco jeanEndereco2 = new Endereco(2, 1559, "Rua das Máquinas",
                 "17° Andar", "05205040", "São Paulo", "São Paulo", "Brasil");
         Cliente jean = new Cliente("Jean", "69061807034", jeanContato1,
-                jeanContato2, jeanEndereco1, null);
+                null, jeanEndereco1, null);
 
         ContaCorrente contaJean = new ContaCorrente(jean, "1010", "1101", 5000.0, 200.0);
-        ContaPagamento contaPagamentoJean = new ContaPagamento(jean, "1010", "1101-0", 25000.0);
+        ContaPagamento contaPagamentoJean = new ContaPagamento(jean, "1010", "1101-1", 25000.0);
 
 
         Contato heleniceContato1 = new Contato(1, "Disponível das 17h as 21h", "11999995555");

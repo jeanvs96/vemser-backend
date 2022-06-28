@@ -8,7 +8,7 @@ public class ContaPagamento extends Conta implements Impressao{
     @Override
     public void imprimir() {
         this.getCliente().imprimirCliente();
-        System.out.println("CONTA CORRENTE\nAgência: " + this.getAgencia()
+        System.out.println("CONTA PAGAMENTO\nAgência: " + this.getAgencia()
                 + "\nConta: " + this.getNumeroConta() + "\nSaldo: " + this.getSaldo()
                 + "\n");
         this.getCliente().imprimirContatos();

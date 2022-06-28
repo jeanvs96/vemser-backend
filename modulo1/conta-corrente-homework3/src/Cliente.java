@@ -35,8 +35,8 @@ public class Cliente {
         return contatos;
     }
 
-    public void setContatos(ArrayList<Contato> contatos) {
-        this.contatos = contatos;
+    public void setContatos(ArrayList<Contato> contato) {
+        this.contatos = contato;
     }
 
     public ArrayList<Endereco> getEnderecos() {
@@ -44,22 +44,25 @@ public class Cliente {
     }
 
     public void setEnderecos(ArrayList<Endereco> endereco) {
-        this.enderecos = enderecos;
+        this.enderecos = endereco;
     }
 
     public void imprimirContatos() {
-
-        for (int i = 0; i < contatos.size(); i++) {
-            if (contatos.get(i) != null) {
-                contatos.get(i).imprimirContato();
+        if (contatos != null) {
+            for (int i = 0; i < contatos.size(); i++) {
+                if (contatos.get(i) != null) {
+                    contatos.get(i).imprimirContato();
+                }
             }
         }
     }
 
     public void imprimirEnderecos() {
-        for (int i = 0; i < enderecos.size(); i++) {
-            if (enderecos.get(i) != null) {
-                enderecos.get(i).imprimirEndereco();
+        if (enderecos != null) {
+            for (int i = 0; i < enderecos.size(); i++) {
+                if (enderecos.get(i) != null) {
+                    enderecos.get(i).imprimirEndereco();
+                }
             }
         }
     }
