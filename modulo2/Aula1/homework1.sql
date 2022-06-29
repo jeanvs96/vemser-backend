@@ -1,6 +1,6 @@
 CREATE TABLE VEMSER_JEAN.ESTUDANTE (
 	id_estudante NUMBER NOT NULL,
-	nome varchar2(255),
+	nome varchar2(200),
 	data_nascimento DATE NOT NULL,
 	nr_matricula NUMBER(10) NOT NULL UNIQUE,
 	ativo CHAR(1)
