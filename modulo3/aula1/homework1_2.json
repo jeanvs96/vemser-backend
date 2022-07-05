@@ -135,6 +135,27 @@
 					"response": []
 				},
 				{
+					"name": "https://back-vemserdbc.herokuapp.com/contato/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/1",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "https://back-vemserdbc.herokuapp.com/contato",
 					"request": {
 						"method": "POST",
@@ -149,7 +170,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/contato",
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
 							"protocol": "https",
 							"host": [
 								"back-vemserdbc",
@@ -157,7 +178,8 @@
 								"com"
 							],
 							"path": [
-								"contato"
+								"contato",
+								"4"
 							]
 						}
 					},
@@ -170,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"idPessoa\": 1,\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"048995876566\",\n        \"descricao\": \"whatsapp\"\n    }",
+							"raw": "{\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"048995876566\",\n        \"descricao\": \"whatsapp\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -178,7 +200,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/contato/1",
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
 							"protocol": "https",
 							"host": [
 								"back-vemserdbc",
@@ -187,7 +209,32 @@
 							],
 							"path": [
 								"contato",
-								"1"
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://back-vemserdbc.herokuapp.com/contato/2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"4"
 							]
 						}
 					},
