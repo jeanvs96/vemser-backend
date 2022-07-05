@@ -162,7 +162,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"048995876566\",\n        \"descricao\": \"whatsapp\"\n    }",
+							"raw": "{\n        \"idPessoa\": 3,\n        \"tipoContato\": \"COMERCIAL\",\n        \"numero\": \"5555550000\",\n        \"descricao\": \"whatsapp\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -170,7 +170,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/2",
 							"protocol": "https",
 							"host": [
 								"back-vemserdbc",
@@ -179,7 +179,7 @@
 							],
 							"path": [
 								"contato",
-								"4"
+								"2"
 							]
 						}
 					},
@@ -192,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"048995876566\",\n        \"descricao\": \"whatsapp\"\n    }",
+							"raw": "{\n        \"idPessoa\": 2,\n        \"tipoContato\": \"COMERCIAL\",\n        \"numero\": \"051998654789\",\n        \"descricao\": \"trabalho\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -200,7 +200,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/2",
 							"protocol": "https",
 							"host": [
 								"back-vemserdbc",
@@ -209,7 +209,7 @@
 							],
 							"path": [
 								"contato",
-								"4"
+								"2"
 							]
 						}
 					},
