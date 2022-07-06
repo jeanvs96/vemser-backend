@@ -13,9 +13,10 @@ public class ContatoService {
         contatoRepository = new ContatoRepository();
     }
 
-    public Contato create(Contato contato) throws Exception {
-        verificarIdPessoa(contato.getIdPessoa());
+    public Contato create(Contato contato, Integer idPessoa) throws Exception {
+        verificarIdPessoa(idPessoa);
         verificarTipoDeContato(contato.getTipoContato());
+        contato.setIdPessoa(idPessoa);
         return contatoRepository.create(contato);
 
     }
