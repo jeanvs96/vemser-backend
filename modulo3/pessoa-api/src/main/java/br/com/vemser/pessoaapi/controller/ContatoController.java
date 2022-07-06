@@ -27,7 +27,7 @@ public class ContatoController {
     }
 
     @PostMapping
-    public Contato create(@RequestBody Contato contato) {
+    public Contato create(@RequestBody Contato contato) throws Exception {
         return contatoService.create(contato);
     }
 
