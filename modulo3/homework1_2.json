@@ -162,7 +162,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"idPessoa\": 3,\n        \"tipoContato\": \"COMERCIAL\",\n        \"numero\": \"5555550000\",\n        \"descricao\": \"whatsapp\"\n    }",
+							"raw": "{\n        \"tipoContato\": \"COMERCIAL\",\n        \"numero\": \"5555550000\",\n        \"descricao\": \"whatsapp\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
