@@ -1,15 +1,29 @@
 package br.com.vemser.pessoaapi.entity;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Endereco {
     private Integer idEndereco;
     private Integer idPessoa;
+    @NotNull(message = "Informe o tipo de endereço (COMERCIAL/RESIDENCIAL)")
     private TipoEndereco tipo;
+    @NotEmpty(message = "Informe um logradouro válido")
+    @Size(max = 250, message = "Informe um logradouro com até 250 carácteres")
     private String logradouro;
+    @NotEmpty(message = "Informe um número válido")
     private Integer numero;
     private String complemento;
+    @NotEmpty(message = "Informe um CEP válido")
+    @Size(max = 8, min = 8, message = "O CEP deve conter somente 8 números")
     private String cep;
+    @NotEmpty(message = "Informe uma cidade válida")
+    @Size(max = 250, message = "Informe uma cidade com até 250 carácteres")
     private String cidade;
+    @NotNull(message = "Informe um estado")
     private String estado;
+    @NotNull(message = "Informe um país")
     private String pais;
 
     public Endereco(Integer idEndereco, Integer idPessoa, TipoEndereco tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {

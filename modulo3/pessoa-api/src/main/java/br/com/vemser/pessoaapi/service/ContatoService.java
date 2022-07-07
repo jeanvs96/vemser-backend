@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.service;
 
 import br.com.vemser.pessoaapi.entity.Contato;
-import br.com.vemser.pessoaapi.entity.TipoContato;
+import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,50 +14,40 @@ public class ContatoService {
     @Autowired
     private ContatoRepository contatoRepository;
 
-    public ContatoService() {}
+    @Autowired
+    private PessoaService pessoaService;
 
-    public Contato create(Contato contato, Integer idPessoa) throws Exception {
-        verificarIdPessoa(idPessoa);
-        contato.setIdPessoa(idPessoa);
+    public ContatoService() {
+    }
+
+    public Contato create(Contato contato, Integer idPessoa) throws RegraDeNegocioException {
+        contato.setIdPessoa(pessoaService.listByIdPessoa(idPessoa).getIdPessoa());
         return contatoRepository.create(contato);
-
     }
 
     public List<Contato> list() {
         return contatoRepository.list();
     }
 
-    public Contato update(Integer id, Contato contatoAtualizar) throws Exception {
-        verificarIdPessoa(contatoAtualizar.getIdPessoa());
-        return contatoRepository.update(recuperarContato(id), contatoAtualizar);
+    public Contato update(Integer idContato, Contato contatoAtualizar) throws RegraDeNegocioException {
+        pessoaService.listByIdPessoa(contatoAtualizar.getIdPessoa());
+        return contatoRepository.update(contatoByIdContato(idContato), contatoAtualizar);
     }
 
-    public void delete(Integer idContato) throws Exception {
-        recuperarContato(idContato);
-        contatoRepository.delete(idContato);
+    public void delete(Integer idContato) throws RegraDeNegocioException {
+        contatoRepository.delete(contatoByIdContato(idContato));
     }
 
     public List<Contato> listByIdPessoa(Integer idPessoa) {
-        return contatoRepository.listByIdPessoa(idPessoa);
+        return list().stream()
+                .filter(contato -> contato.getIdPessoa().equals(idPessoa)).toList();
     }
 
+    public Contato contatoByIdContato(Integer idContato) throws RegraDeNegocioException {
 
-
-    public boolean verificarIdPessoa(Integer idPessoa) throws Exception{
-        PessoaService pessoaService = new PessoaService();
-        pessoaService.list().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
+        return list().stream()
+                .filter(contato -> contato.getIdContato().equals(idContato))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
-        return true;
-    }
-
-    public Contato recuperarContato(Integer idContato) throws Exception {
-        try {
-            Contato contatoRecuperado = contatoRepository.contatoByIdContato(idContato);
-            return contatoRecuperado;
-        } catch (Exception e) {
-            throw  new Exception("Contato não econtrado");
-        }
+                .orElseThrow(() -> new RegraDeNegocioException("O contato informado não existe"));
     }
 }

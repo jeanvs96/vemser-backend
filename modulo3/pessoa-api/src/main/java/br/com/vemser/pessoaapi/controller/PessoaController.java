@@ -2,14 +2,20 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.config.PropertieReader;
+import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pessoa") //localhost:8080/pessoa
+@RequestMapping("/pessoa")
+@Validated
 public class PessoaController {
 
     @Autowired
@@ -18,10 +24,11 @@ public class PessoaController {
     @Autowired
     private PropertieReader propertieReader;
 
-    public PessoaController(){}
+    public PessoaController() {
+    }
 
     @GetMapping("/ambiente")
-    public String getAmbiente(){
+    public String getAmbiente() {
         return propertieReader.getAmbiente();
     }
 
@@ -36,17 +43,17 @@ public class PessoaController {
     }
 
     @PostMapping
-    public Pessoa create(@RequestBody Pessoa pessoa) throws Exception {
-        return pessoaService.create(pessoa);
+    public ResponseEntity<Pessoa> create(@Valid @RequestBody Pessoa pessoa) throws RegraDeNegocioException {
+        return new ResponseEntity(pessoaService.create(pessoa), HttpStatus.OK);
     }
 
     @PutMapping("/{idPessoa}")
-    public Pessoa update(@PathVariable ("idPessoa") Integer id, @RequestBody Pessoa pessoaAtualizar) throws  Exception {
-        return pessoaService.update(id, pessoaAtualizar);
+    public ResponseEntity<Pessoa> update(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Pessoa pessoaAtualizar) throws RegraDeNegocioException {
+        return new ResponseEntity(pessoaService.update(id, pessoaAtualizar), HttpStatus.OK);
     }
 
     @DeleteMapping("/{idPessoa}")
-    public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
+    public void delete(@PathVariable("idPessoa") Integer id) throws RegraDeNegocioException {
         pessoaService.delete(id);
     }
 }

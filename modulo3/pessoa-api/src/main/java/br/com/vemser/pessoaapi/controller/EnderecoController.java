@@ -1,14 +1,20 @@
 package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.entity.Endereco;
+import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
+@Validated
 public class EnderecoController {
 
     @Autowired
@@ -20,7 +26,7 @@ public class EnderecoController {
     }
 
     @GetMapping("/{idEndereco}")
-    public Endereco listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) throws Exception {
+    public Endereco listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
         return enderecoService.listByIdEndereco(idEndereco);
     }
 
@@ -30,17 +36,17 @@ public class EnderecoController {
     }
 
     @PostMapping("/{idPessoa}")
-    public Endereco create(@RequestBody Endereco endereco, @PathVariable("idPessoa") Integer idPessoa) throws Exception {
-        return enderecoService.create(endereco, idPessoa);
+    public ResponseEntity<Endereco> create(@Valid @RequestBody Endereco endereco, @PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
+        return new ResponseEntity<>(enderecoService.create(endereco, idPessoa), HttpStatus.OK);
     }
 
     @PutMapping("/{idEndereco}")
-    public Endereco update(@PathVariable("idEndereco") Integer idEndereco,@RequestBody Endereco enderecoAtualizar) throws Exception {
-        return enderecoService.update(idEndereco, enderecoAtualizar);
+    public ResponseEntity<Endereco> update(@PathVariable("idEndereco") Integer idEndereco, @RequestBody Endereco enderecoAtualizar) throws RegraDeNegocioException {
+        return new ResponseEntity<>(enderecoService.update(idEndereco, enderecoAtualizar), HttpStatus.OK);
     }
 
     @DeleteMapping("/{idEndereco}")
-    public void delete(@PathVariable("idEndereco") Integer idEndereco) throws Exception {
+    public void delete(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
         enderecoService.delete(idEndereco);
     }
 

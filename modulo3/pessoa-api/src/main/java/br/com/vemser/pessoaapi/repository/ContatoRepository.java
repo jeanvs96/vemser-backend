@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 @Repository
 public class ContatoRepository {
@@ -31,7 +30,7 @@ public class ContatoRepository {
     }
 
     public Contato update(Contato contatoRecuperado,
-                         Contato contatoAtualizar) throws Exception {
+                          Contato contatoAtualizar) {
         contatoRecuperado.setTipoContato(contatoAtualizar.getTipoContato());
         contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
         contatoRecuperado.setNumero(contatoAtualizar.getNumero());
@@ -39,23 +38,8 @@ public class ContatoRepository {
         return contatoRecuperado;
     }
 
-    public void delete(Integer id) throws Exception {
-        Contato contatoRemover = contatoByIdContato(id);
-        listaContato.remove(contatoRemover);
+    public void delete(Contato contato) {
+        listaContato.remove(contato);
     }
 
-    public List<Contato> listByIdPessoa(Integer idPessoa) {
-        return listaContato.stream()
-                .filter(contato -> contato.getIdPessoa().equals(idPessoa))
-                .collect(Collectors.toList());
-    }
-
-    public Contato contatoByIdContato(Integer idContato) throws Exception {
-        try {
-            Contato contatoRecuperado = listaContato.stream().filter(contato -> contato.getIdContato().equals(idContato)).findFirst().get();
-            return contatoRecuperado;
-        } catch (Exception e) {
-            throw new Exception();
-        }
-    }
 }
