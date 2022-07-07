@@ -3,14 +3,14 @@ package br.com.vemser.pessoaapi.entity;
 public class Contato {
     Integer idContato;
     Integer idPessoa;
-    String tipoContato;
+    TipoContato tipoContato;
     String numero;
     String descricao;
 
     public Contato() {
     }
 
-    public Contato(Integer idContato, Integer idPessoa, String tipoContato, String numero, String descricao) {
+    public Contato(Integer idContato, Integer idPessoa, TipoContato tipoContato, String numero, String descricao) {
         this.idContato = idContato;
         this.idPessoa = idPessoa;
         this.tipoContato = tipoContato;
@@ -34,11 +34,11 @@ public class Contato {
         this.idPessoa = idPessoa;
     }
 
-    public String getTipoContato() {
+    public TipoContato getTipoContato() {
         return tipoContato;
     }
 
-    public void setTipoContato(String tipoContato) {
+    public void setTipoContato(TipoContato tipoContato) {
         this.tipoContato = tipoContato;
     }
 

@@ -1,21 +1,23 @@
 package br.com.vemser.pessoaapi.service;
 
 import br.com.vemser.pessoaapi.entity.Contato;
+import br.com.vemser.pessoaapi.entity.TipoContato;
 import br.com.vemser.pessoaapi.repository.ContatoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ContatoService {
 
+    @Autowired
     private ContatoRepository contatoRepository;
 
-    public ContatoService() {
-        contatoRepository = new ContatoRepository();
-    }
+    public ContatoService() {}
 
     public Contato create(Contato contato, Integer idPessoa) throws Exception {
         verificarIdPessoa(idPessoa);
-        verificarTipoDeContato(contato.getTipoContato());
         contato.setIdPessoa(idPessoa);
         return contatoRepository.create(contato);
 
@@ -27,28 +29,19 @@ public class ContatoService {
 
     public Contato update(Integer id, Contato contatoAtualizar) throws Exception {
         verificarIdPessoa(contatoAtualizar.getIdPessoa());
-        verificarTipoDeContato(contatoAtualizar.getTipoContato());
-        return contatoRepository.update(id, contatoAtualizar);
-
+        return contatoRepository.update(recuperarContato(id), contatoAtualizar);
     }
 
-    public void delete(Integer id) throws Exception {
-        contatoRepository.delete(id);
+    public void delete(Integer idContato) throws Exception {
+        recuperarContato(idContato);
+        contatoRepository.delete(idContato);
     }
 
     public List<Contato> listByIdPessoa(Integer idPessoa) {
         return contatoRepository.listByIdPessoa(idPessoa);
     }
 
-    public boolean verificarTipoDeContato(String tipoDeContato) throws Exception {
-        ContatoType[] comercial = ContatoType.values();
-        for (ContatoType t : comercial) {
-            if (t.toString().equals(tipoDeContato)) {
-                return true;
-            }
-        }
-        throw new Exception("Tipo de contato inválido.");
-    }
+
 
     public boolean verificarIdPessoa(Integer idPessoa) throws Exception{
         PessoaService pessoaService = new PessoaService();
@@ -57,5 +50,14 @@ public class ContatoService {
                 .findFirst()
                 .orElseThrow(() -> new Exception("Pessoa não econtrada"));
         return true;
+    }
+
+    public Contato recuperarContato(Integer idContato) throws Exception {
+        try {
+            Contato contatoRecuperado = contatoRepository.contatoByIdContato(idContato);
+            return contatoRecuperado;
+        } catch (Exception e) {
+            throw  new Exception("Contato não econtrado");
+        }
     }
 }
