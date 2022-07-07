@@ -39,11 +39,9 @@ public class EnderecoService {
     }
 
     public Endereco listByIdEndereco(Integer idEndereco) throws RegraDeNegocioException {
-        Endereco enderecoRecuperado = list().stream()
+         return list().stream()
                 .filter(endereco -> endereco.getIdEndereco().equals(idEndereco))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Endereço não encontrado"));
-        return enderecoRecuperado;
-
     }
 }

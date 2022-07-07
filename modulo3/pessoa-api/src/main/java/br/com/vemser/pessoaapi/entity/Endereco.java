@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.entity;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +13,8 @@ public class Endereco {
     @NotEmpty(message = "Informe um logradouro válido")
     @Size(max = 250, message = "Informe um logradouro com até 250 carácteres")
     private String logradouro;
-    @NotEmpty(message = "Informe um número válido")
+    @NotNull(message = "Informe um número válido")
+    @Min(0)
     private Integer numero;
     private String complemento;
     @NotEmpty(message = "Informe um CEP válido")
