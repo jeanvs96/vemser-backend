@@ -3,17 +3,17 @@ package br.com.vemser.pessoaapi.entity;
 import javax.validation.constraints.*;
 
 public class Contato {
-    Integer idContato;
-    Integer idPessoa;
+    private Integer idContato;
+    private Integer idPessoa;
     @NotNull(message = "Informe o tipo de contato")
-    TipoContato tipoContato;
+    private TipoContato tipoContato;
 
     @NotEmpty(message = "Informe o número")
     @Size(max = 13, message = "Informe um número válido")
-    String numero;
+    private String numero;
 
     @NotEmpty
-    String descricao;
+    private String descricao;
 
     public Contato() {
     }
