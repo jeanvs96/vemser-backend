@@ -1,5 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
+import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
+import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.config.PropertieReader;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
@@ -43,13 +45,13 @@ public class PessoaController {
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> create(@Valid @RequestBody Pessoa pessoa) throws RegraDeNegocioException {
+    public ResponseEntity<PessoaDTO> create(@Valid @RequestBody PessoaCreateDTO pessoa) throws RegraDeNegocioException {
         return new ResponseEntity(pessoaService.create(pessoa), HttpStatus.OK);
     }
 
     @PutMapping("/{idPessoa}")
-    public ResponseEntity<Pessoa> update(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Pessoa pessoaAtualizar) throws RegraDeNegocioException {
-        return new ResponseEntity(pessoaService.update(id, pessoaAtualizar), HttpStatus.OK);
+    public ResponseEntity<PessoaDTO> update(@PathVariable("idPessoa") Integer id, @Valid @RequestBody PessoaCreateDTO pessoaAtualizarDTO) throws RegraDeNegocioException {
+        return new ResponseEntity(pessoaService.update(id, pessoaAtualizarDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{idPessoa}")

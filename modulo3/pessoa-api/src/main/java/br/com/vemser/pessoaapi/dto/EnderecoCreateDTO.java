@@ -1,5 +1,6 @@
-package br.com.vemser.pessoaapi.entity;
+package br.com.vemser.pessoaapi.dto;
 
+import br.com.vemser.pessoaapi.entity.TipoEndereco;
 import lombok.*;
 
 import javax.validation.constraints.Min;
@@ -12,9 +13,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Endereco {
+public class EnderecoCreateDTO {
 
-    private Integer idEndereco;
     private Integer idPessoa;
     @NotNull(message = "Informe o tipo de endereço (COMERCIAL/RESIDENCIAL)")
     private TipoEndereco tipo;

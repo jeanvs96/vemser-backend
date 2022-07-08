@@ -1,5 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
+import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
+import br.com.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.ContatoService;
@@ -33,13 +35,13 @@ public class ContatoController {
     }
 
     @PostMapping("/{idPessoa}")
-    public ResponseEntity<Contato> create(@Valid @RequestBody Contato contato, @PathVariable ("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
-        return new ResponseEntity<>(contatoService.create(contato, idPessoa), HttpStatus.OK);
+    public ResponseEntity<ContatoDTO> create(@Valid @RequestBody ContatoCreateDTO contatoCreateDTO, @PathVariable ("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
+        return new ResponseEntity<>(contatoService.create(contatoCreateDTO, idPessoa), HttpStatus.OK);
     }
 
     @PutMapping("/{idContato}")
-    public ResponseEntity<Contato> update(@PathVariable ("idContato") Integer id, @RequestBody Contato contatoAtualizar) throws  RegraDeNegocioException {
-        return new ResponseEntity<>(contatoService.update(id, contatoAtualizar), HttpStatus.OK);
+    public ResponseEntity<ContatoDTO> update(@PathVariable ("idContato") Integer id, @RequestBody ContatoCreateDTO contatoAtualizarDTO) throws  RegraDeNegocioException {
+        return new ResponseEntity<>(contatoService.update(id, contatoAtualizarDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{idContato}")

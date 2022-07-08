@@ -1,5 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
+import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
+import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.EnderecoService;
@@ -36,13 +38,13 @@ public class EnderecoController {
     }
 
     @PostMapping("/{idPessoa}")
-    public ResponseEntity<Endereco> create(@Valid @RequestBody Endereco endereco, @PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
-        return new ResponseEntity<>(enderecoService.create(endereco, idPessoa), HttpStatus.OK);
+    public ResponseEntity<EnderecoDTO> create(@Valid @RequestBody EnderecoCreateDTO enderecoCreateDTO, @PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
+        return new ResponseEntity<>(enderecoService.create(enderecoCreateDTO, idPessoa), HttpStatus.OK);
     }
 
     @PutMapping("/{idEndereco}")
-    public ResponseEntity<Endereco> update(@PathVariable("idEndereco") Integer idEndereco, @RequestBody Endereco enderecoAtualizar) throws RegraDeNegocioException {
-        return new ResponseEntity<>(enderecoService.update(idEndereco, enderecoAtualizar), HttpStatus.OK);
+    public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer idEndereco, @RequestBody EnderecoCreateDTO enderecoAtualizarDTO) throws RegraDeNegocioException {
+        return new ResponseEntity<>(enderecoService.update(idEndereco, enderecoAtualizarDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{idEndereco}")
