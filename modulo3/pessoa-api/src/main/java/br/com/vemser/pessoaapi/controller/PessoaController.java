@@ -2,7 +2,6 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.config.PropertieReader;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.PessoaService;
@@ -35,12 +34,12 @@ public class PessoaController {
     }
 
     @GetMapping
-    public List<Pessoa> list() {
+    public List<PessoaDTO> list() {
         return pessoaService.list();
     }
 
     @GetMapping("/byname")
-    public List<Pessoa> listByName(@RequestParam("nome") String nome) {
+    public List<PessoaDTO> listByName(@RequestParam("nome") String nome) {
         return pessoaService.listByName(nome);
     }
 

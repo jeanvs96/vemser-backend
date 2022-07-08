@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,8 +41,13 @@ public class ContatoService {
         return contatoDTO;
     }
 
-    public List<Contato> list() {
-        return contatoRepository.list();
+    public List<ContatoDTO> list() {
+        List<ContatoDTO> contatosDTO = new ArrayList<>();
+        List<Contato> contatosEntity = contatoRepository.list();
+        for (Contato contato: contatosEntity) {
+            contatosDTO.add(objectMapper.convertValue(contato, ContatoDTO.class));
+        }
+        return contatosDTO;
     }
 
     public ContatoDTO update(Integer idContato, ContatoCreateDTO contatoAtualizarDTO) throws RegraDeNegocioException {
@@ -60,16 +66,24 @@ public class ContatoService {
         log.info("Contato deletado");
     }
 
-    public List<Contato> listByIdPessoa(Integer idPessoa) {
-        return list().stream()
+    public List<ContatoDTO> listByIdPessoa(Integer idPessoa) {
+        List<ContatoDTO> contatosDTO = new ArrayList<>();
+        List<Contato> contatosEntity = contatoRepository.list().stream()
                 .filter(contato -> contato.getIdPessoa().equals(idPessoa)).toList();
+        for (Contato contato: contatosEntity) {
+            contatosDTO.add(objectMapper.convertValue(contato, ContatoDTO.class));
+        }
+        return contatosDTO;
     }
 
-    public Contato contatoByIdContato(Integer idContato) throws RegraDeNegocioException {
 
-        return list().stream()
+    public Contato contatoByIdContato(Integer idContato) throws RegraDeNegocioException {
+        return contatoRepository.list().stream()
                 .filter(contato -> contato.getIdContato().equals(idContato))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("O contato informado não existe"));
     }
+
+
+
 }

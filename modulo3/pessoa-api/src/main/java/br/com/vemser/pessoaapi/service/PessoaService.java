@@ -11,7 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -35,8 +37,13 @@ public class PessoaService {
         return pessoaDTO;
     }
 
-    public List<Pessoa> list() {
-        return pessoaRepository.list();
+    public List<PessoaDTO> list() {
+        List<PessoaDTO> pessoasDTO = new ArrayList<>();
+        List<Pessoa> pessoasEntity = pessoaRepository.list();
+        for (Pessoa pessoa : pessoasEntity) {
+            pessoasDTO.add(objectMapper.convertValue(pessoa, PessoaDTO.class));
+        }
+        return pessoasDTO;
     }
 
     public PessoaDTO update(Integer id, PessoaCreateDTO pessoaAtualizarDTO) throws RegraDeNegocioException {
@@ -56,14 +63,21 @@ public class PessoaService {
     }
 
     public Pessoa listByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
-        return list().stream()
+        return pessoaRepository.list().stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
     }
 
-    public List<Pessoa> listByName(String nome) {
-        return list().stream()
-                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase())).toList();
+    public List<PessoaDTO> listByName(String nome) {
+        List<PessoaDTO> pessoasDTO = new ArrayList<>();
+        List<Pessoa> pessoasEntity = pessoaRepository.list()
+                .stream()
+                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
+                .collect(Collectors.toList());
+        for (Pessoa pessoa : pessoasEntity) {
+            pessoasDTO.add(objectMapper.convertValue(pessoa, PessoaDTO.class));
+        }
+        return pessoasDTO;
     }
 }

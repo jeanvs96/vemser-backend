@@ -23,17 +23,17 @@ public class EnderecoController {
     private EnderecoService enderecoService;
 
     @GetMapping
-    public List<Endereco> list() {
+    public List<EnderecoDTO> list() {
         return enderecoService.list();
     }
 
     @GetMapping("/{idEndereco}")
-    public Endereco listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
-        return enderecoService.listByIdEndereco(idEndereco);
+    public EnderecoDTO listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
+        return enderecoService.dtoByIdEndereco(idEndereco);
     }
 
     @GetMapping("/{idPessoa}/pessoa")
-    public List<Endereco> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
+    public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
         return enderecoService.listByIdPessoa(idPessoa);
     }
 

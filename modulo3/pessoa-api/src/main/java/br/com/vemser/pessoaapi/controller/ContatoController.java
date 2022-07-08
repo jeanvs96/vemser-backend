@@ -2,7 +2,6 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.vemser.pessoaapi.dto.ContatoDTO;
-import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,12 @@ public class ContatoController {
     public ContatoController() {}
 
     @GetMapping
-    public List<Contato> list(){
+    public List<ContatoDTO> list(){
         return contatoService.list();
     }
 
     @GetMapping("/{idPessoa}")
-    public List<Contato> listByIdPessoa(@PathVariable ("idPessoa") Integer idPessoa) {
+    public List<ContatoDTO> listByIdPessoa(@PathVariable ("idPessoa") Integer idPessoa) {
         return contatoService.listByIdPessoa(idPessoa);
     }
 
