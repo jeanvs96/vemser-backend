@@ -2,6 +2,7 @@ package br.com.vemser.pessoaapi.service;
 
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.Pessoa;
+import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class EmailService {
     private String from;
 
     private final JavaMailSender emailSender;
+
 
     public void sendSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -143,6 +145,87 @@ public class EmailService {
         dados.put("email", from);
 
         Template template = fmConfiguration.getTemplate("emailDeletarPessoa-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    public void sendEmailAdicionarEndereco(Pessoa pessoa) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoa.getEmail());
+            mimeMessageHelper.setSubject("App - Endereço adicionado");
+            mimeMessageHelper.setText(geContentFromTemplateAdicionarEndereco(pessoa), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String geContentFromTemplateAdicionarEndereco(Pessoa pessoa) throws IOException, TemplateException, RegraDeNegocioException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoa.getNome());
+        dados.put("email", from);
+
+        Template template = fmConfiguration.getTemplate("emailAdicionarEndereco-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    public void sendEmailAtualizarEndereco(Pessoa pessoa) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoa.getEmail());
+            mimeMessageHelper.setSubject("App - Endereço atualizado");
+            mimeMessageHelper.setText(geContentFromTemplateAtualizarEndereco(pessoa), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String geContentFromTemplateAtualizarEndereco(Pessoa pessoa) throws IOException, TemplateException, RegraDeNegocioException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoa.getNome());
+        dados.put("email", from);
+
+        Template template = fmConfiguration.getTemplate("emailAtualizarEndereco-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    public void sendEmailRemoverEndereco(Pessoa pessoa) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoa.getEmail());
+            mimeMessageHelper.setSubject("App - Endereço removido");
+            mimeMessageHelper.setText(geContentFromTemplateRemoverEndereco(pessoa), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String geContentFromTemplateRemoverEndereco(Pessoa pessoa) throws IOException, TemplateException, RegraDeNegocioException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoa.getNome());
+        dados.put("email", from);
+
+        Template template = fmConfiguration.getTemplate("emailRemoverEndereco-template.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }

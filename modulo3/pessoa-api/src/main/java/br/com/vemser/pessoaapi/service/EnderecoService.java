@@ -25,7 +25,10 @@ public class EnderecoService {
     private PessoaService pessoaService;
 
     @Autowired
+    private EmailService emailService;
+    @Autowired
     private ObjectMapper objectMapper;
+
 
     public List<EnderecoDTO> list() {
         List<EnderecoDTO> enderecosDTO = new ArrayList<>();
@@ -43,6 +46,7 @@ public class EnderecoService {
         Endereco enderecoEntity = objectMapper.convertValue(enderecoCreateDTO, Endereco.class);
         enderecoEntity = enderecoRepository.create(enderecoEntity);
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEntity, EnderecoDTO.class);
+        emailService.sendEmailAdicionarEndereco(pessoa);
         log.info("Endereço adicionado");
         return enderecoDTO;
     }
@@ -53,13 +57,16 @@ public class EnderecoService {
         Endereco enderecoEntity = objectMapper.convertValue(enderecoAtualizarDTO, Endereco.class);
         enderecoEntity = enderecoRepository.update(recuperarByIdEndereco(idEndereco), enderecoEntity);
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEntity, EnderecoDTO.class);
+        emailService.sendEmailAtualizarEndereco(pessoa);
         log.info("Endereço atualizado");
         return enderecoDTO;
     }
 
     public void delete(Integer idEndereco) throws RegraDeNegocioException {
         log.warn("Removendo endereço...");
+        Pessoa pessoa = pessoaService.listByIdPessoa(recuperarByIdEndereco(idEndereco).getIdPessoa());
         enderecoRepository.delete(recuperarByIdEndereco(idEndereco));
+        emailService.sendEmailRemoverEndereco(pessoa);
         log.info("Endereço removido");
     }
 
