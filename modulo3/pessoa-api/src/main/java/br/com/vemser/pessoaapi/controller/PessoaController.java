@@ -4,6 +4,7 @@ import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.config.PropertieReader;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -25,7 +27,13 @@ public class PessoaController {
     @Autowired
     private PropertieReader propertieReader;
 
-    public PessoaController() {
+    @Autowired
+    private EmailService emailService;
+
+    @GetMapping("/mail")
+    public String sendMail() throws MessagingException {
+        emailService.sendWithAttachment();
+        return "Enviando email...";
     }
 
     @GetMapping("/ambiente")

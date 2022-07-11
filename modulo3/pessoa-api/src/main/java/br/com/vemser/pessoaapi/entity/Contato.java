@@ -13,12 +13,12 @@ public class Contato {
 
     private Integer idContato;
     private Integer idPessoa;
-    @NotNull(message = "Informe o tipo de contato")
+//    @NotNull(message = "Informe o tipo de contato")
     private TipoContato tipoContato;
-    @NotEmpty(message = "Informe o número")
-    @Size(max = 13, message = "Informe um número válido")
+//    @NotEmpty(message = "Informe o número")
+//    @Size(max = 13, message = "Informe um número válido")
     private String numero;
 
-    @NotEmpty
+//    @NotEmpty
     private String descricao;
 }

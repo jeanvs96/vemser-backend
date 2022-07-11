@@ -23,7 +23,10 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
 
     @Autowired
+    private EmailService emailService;
+    @Autowired
     private ObjectMapper objectMapper;
+
 
     public PessoaService() {
     }
@@ -43,6 +46,7 @@ public class PessoaService {
         pessoaEntity = pessoaRepository.create(pessoaEntity);
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
         log.info(pessoaDTO.getNome() + " adicionado(a) ao banco de dados");
+        emailService.sendEmailCriarPessoa(pessoaDTO);
         return pessoaDTO;
     }
 
@@ -52,6 +56,7 @@ public class PessoaService {
         pessoaEntity = pessoaRepository.update(listByIdPessoa(id), pessoaEntity);
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
         log.info("Dados de " + pessoaDTO.getNome() + " atualizados no banco de dados");
+        emailService.sendEmailAlterarPessoa(pessoaDTO);
         return pessoaDTO;
     }
 
@@ -59,7 +64,8 @@ public class PessoaService {
         log.warn("Deletando...");
         Pessoa pessoaDeletar = listByIdPessoa(id);
         pessoaRepository.delete(pessoaDeletar);
-        log.info(pessoaDeletar.getNome() + "removida do banco de dados");
+        emailService.sendEmailDeletarPessoa(pessoaDeletar);
+        log.info(pessoaDeletar.getNome() + " removida do banco de dados");
     }
 
     public List<PessoaDTO> listByName(String nome) {

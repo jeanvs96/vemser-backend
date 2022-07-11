@@ -13,12 +13,13 @@ import java.time.LocalDate;
 public class Pessoa {
 
     private Integer idPessoa;
-    @NotBlank(message = "Informe o nome")
+//    @NotBlank(message = "Informe o nome")
     private String nome;
-    @NotNull
-    @Past
+//    @NotNull
+//    @Past
     private LocalDate dataNascimento;
-    @NotBlank
-    @Size(max = 11, min = 11, message = "O CPF deve conter somente 11 números.")
+//    @NotBlank
+//    @Size(max = 11, min = 11, message = "O CPF deve conter somente 11 números.")
     private String cpf;
+    private String email;
 }
