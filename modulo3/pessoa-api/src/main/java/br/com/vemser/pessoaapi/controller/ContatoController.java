@@ -21,16 +21,14 @@ public class ContatoController {
     @Autowired
     private ContatoService contatoService;
 
-    public ContatoController() {}
-
     @GetMapping
-    public List<ContatoDTO> list(){
-        return contatoService.list();
+    public ResponseEntity<List<ContatoDTO>> list(){
+        return new ResponseEntity<>(contatoService.list(), HttpStatus.OK);
     }
 
-    @GetMapping("/{idPessoa}")
-    public List<ContatoDTO> listByIdPessoa(@PathVariable ("idPessoa") Integer idPessoa) {
-        return contatoService.listByIdPessoa(idPessoa);
+    @GetMapping("/{idPessoa}/pessoa")
+    public ResponseEntity<List<ContatoDTO>> listByIdPessoa(@PathVariable ("idPessoa") Integer idPessoa) {
+        return new ResponseEntity<>(contatoService.listByIdPessoa(idPessoa), HttpStatus.OK);
     }
 
     @PostMapping("/{idPessoa}")
@@ -39,7 +37,7 @@ public class ContatoController {
     }
 
     @PutMapping("/{idContato}")
-    public ResponseEntity<ContatoDTO> update(@PathVariable ("idContato") Integer id, @RequestBody ContatoCreateDTO contatoAtualizarDTO) throws  RegraDeNegocioException {
+    public ResponseEntity<ContatoDTO> update(@PathVariable ("idContato") Integer id, @Valid @RequestBody ContatoCreateDTO contatoAtualizarDTO) throws  RegraDeNegocioException {
         return new ResponseEntity<>(contatoService.update(id, contatoAtualizarDTO), HttpStatus.OK);
     }
 

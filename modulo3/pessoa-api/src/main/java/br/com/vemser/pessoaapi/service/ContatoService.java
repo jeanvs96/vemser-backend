@@ -30,6 +30,15 @@ public class ContatoService {
     public ContatoService() {
     }
 
+    public List<ContatoDTO> list() {
+        List<ContatoDTO> contatosDTO = new ArrayList<>();
+        List<Contato> contatosEntity = contatoRepository.list();
+        for (Contato contato: contatosEntity) {
+            contatosDTO.add(objectMapper.convertValue(contato, ContatoDTO.class));
+        }
+        return contatosDTO;
+    }
+
     public ContatoDTO create(ContatoCreateDTO contatoCreateDTO, Integer idPessoa) throws RegraDeNegocioException {
         Pessoa pessoa = pessoaService.listByIdPessoa(idPessoa);
         log.info("Adicionando contato à pessoa: " + pessoa.getNome());
@@ -39,15 +48,6 @@ public class ContatoService {
         ContatoDTO contatoDTO = objectMapper.convertValue(contatoEntity, ContatoDTO.class);
         log.info("Contato adicionado");
         return contatoDTO;
-    }
-
-    public List<ContatoDTO> list() {
-        List<ContatoDTO> contatosDTO = new ArrayList<>();
-        List<Contato> contatosEntity = contatoRepository.list();
-        for (Contato contato: contatosEntity) {
-            contatosDTO.add(objectMapper.convertValue(contato, ContatoDTO.class));
-        }
-        return contatosDTO;
     }
 
     public ContatoDTO update(Integer idContato, ContatoCreateDTO contatoAtualizarDTO) throws RegraDeNegocioException {
@@ -83,7 +83,4 @@ public class ContatoService {
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("O contato informado não existe"));
     }
-
-
-
 }

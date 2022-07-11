@@ -8,5 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class PessoaDTO extends PessoaCreateDTO{
+
     private Integer idPessoa;
 }

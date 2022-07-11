@@ -34,13 +34,13 @@ public class PessoaController {
     }
 
     @GetMapping
-    public List<PessoaDTO> list() {
-        return pessoaService.list();
+    public ResponseEntity<List<PessoaDTO>> list() {
+        return new ResponseEntity<>(pessoaService.list(), HttpStatus.OK);
     }
 
     @GetMapping("/byname")
-    public List<PessoaDTO> listByName(@RequestParam("nome") String nome) {
-        return pessoaService.listByName(nome);
+    public ResponseEntity<List<PessoaDTO>> listByName(@RequestParam("nome") String nome) {
+        return new ResponseEntity<>(pessoaService.listByName(nome), HttpStatus.OK);
     }
 
     @PostMapping

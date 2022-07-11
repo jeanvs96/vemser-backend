@@ -28,15 +28,6 @@ public class PessoaService {
     public PessoaService() {
     }
 
-    public PessoaDTO create(PessoaCreateDTO pessoaCreateDTO) throws RegraDeNegocioException {
-        log.info("Criando pessoa...");
-        Pessoa pessoaEntity = objectMapper.convertValue(pessoaCreateDTO, Pessoa.class);
-        pessoaEntity = pessoaRepository.create(pessoaEntity);
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
-        log.info(pessoaDTO.getNome() + " adicionado(a) ao banco de dados");
-        return pessoaDTO;
-    }
-
     public List<PessoaDTO> list() {
         List<PessoaDTO> pessoasDTO = new ArrayList<>();
         List<Pessoa> pessoasEntity = pessoaRepository.list();
@@ -44,6 +35,15 @@ public class PessoaService {
             pessoasDTO.add(objectMapper.convertValue(pessoa, PessoaDTO.class));
         }
         return pessoasDTO;
+    }
+
+    public PessoaDTO create(PessoaCreateDTO pessoaCreateDTO) throws RegraDeNegocioException {
+        log.info("Criando pessoa...");
+        Pessoa pessoaEntity = objectMapper.convertValue(pessoaCreateDTO, Pessoa.class);
+        pessoaEntity = pessoaRepository.create(pessoaEntity);
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
+        log.info(pessoaDTO.getNome() + " adicionado(a) ao banco de dados");
+        return pessoaDTO;
     }
 
     public PessoaDTO update(Integer id, PessoaCreateDTO pessoaAtualizarDTO) throws RegraDeNegocioException {
@@ -62,13 +62,6 @@ public class PessoaService {
         log.info(pessoaDeletar.getNome() + "removida do banco de dados");
     }
 
-    public Pessoa listByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
-        return pessoaRepository.list().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
-                .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
-    }
-
     public List<PessoaDTO> listByName(String nome) {
         List<PessoaDTO> pessoasDTO = new ArrayList<>();
         List<Pessoa> pessoasEntity = pessoaRepository.list()
@@ -79,5 +72,12 @@ public class PessoaService {
             pessoasDTO.add(objectMapper.convertValue(pessoa, PessoaDTO.class));
         }
         return pessoasDTO;
+    }
+
+    public Pessoa listByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
+        return pessoaRepository.list().stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
+                .findFirst()
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
     }
 }

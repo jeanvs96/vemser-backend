@@ -15,14 +15,11 @@ import javax.validation.constraints.Size;
 public class ContatoCreateDTO {
 
     private Integer idPessoa;
-
     @NotNull(message = "Informe o tipo de contato")
     private TipoContato tipoContato;
-
     @NotEmpty(message = "Informe o número")
     @Size(max = 13, message = "Informe um número válido")
     private String numero;
-
     @NotEmpty
     private String descricao;
 }

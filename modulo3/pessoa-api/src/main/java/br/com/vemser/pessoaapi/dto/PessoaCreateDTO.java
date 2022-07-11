@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class PessoaCreateDTO {
+
     @NotBlank(message = "Informe o nome")
     private String nome;
     @NotNull
