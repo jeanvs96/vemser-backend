@@ -28,7 +28,7 @@ public class EnderecoController {
 
     @GetMapping("/{idEndereco}")
     public ResponseEntity<EnderecoDTO> listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
-        return new ResponseEntity<>(enderecoService.dtoByIdEndereco(idEndereco), HttpStatus.OK);
+        return new ResponseEntity<>(enderecoService.listByIdEndereco(idEndereco), HttpStatus.OK);
     }
 
     @GetMapping("/{idPessoa}/pessoa")

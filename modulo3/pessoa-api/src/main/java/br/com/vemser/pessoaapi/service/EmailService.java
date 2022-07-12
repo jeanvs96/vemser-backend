@@ -229,4 +229,82 @@ public class EmailService {
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
+
+    public void sendEmailAdicionarContato(Pessoa pessoa) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoa.getEmail());
+            mimeMessageHelper.setSubject("App - Contato adicionado");
+            mimeMessageHelper.setText(geContentFromTemplateAdicionarContato(pessoa), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String geContentFromTemplateAdicionarContato(Pessoa pessoa) throws IOException, TemplateException, RegraDeNegocioException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoa.getNome());
+        dados.put("email", from);
+
+        Template template = fmConfiguration.getTemplate("emailAdicionarContato-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    public void sendEmailAtualizarContato(Pessoa pessoa) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoa.getEmail());
+            mimeMessageHelper.setSubject("App - Contato atualizado");
+            mimeMessageHelper.setText(geContentFromTemplateAtualizarContato(pessoa), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String geContentFromTemplateAtualizarContato(Pessoa pessoa) throws IOException, TemplateException, RegraDeNegocioException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoa.getNome());
+        dados.put("email", from);
+
+        Template template = fmConfiguration.getTemplate("emailAtualizarContato-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    public void sendEmailRemoverContato(Pessoa pessoa) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoa.getEmail());
+            mimeMessageHelper.setSubject("App - Contato removido");
+            mimeMessageHelper.setText(geContentFromTemplateRemoverContato(pessoa), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String geContentFromTemplateRemoverContato(Pessoa pessoa) throws IOException, TemplateException, RegraDeNegocioException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoa.getNome());
+        dados.put("email", from);
+
+        Template template = fmConfiguration.getTemplate("emailRemoverContato-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
 }

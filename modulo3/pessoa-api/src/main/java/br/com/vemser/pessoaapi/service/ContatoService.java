@@ -24,60 +24,73 @@ public class ContatoService {
     private PessoaService pessoaService;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     public ContatoService() {
     }
 
     public List<ContatoDTO> list() {
-        return contatoRepository.list().stream()
-                .map(contato -> objectMapper.convertValue(contato, ContatoDTO.class))
-                .toList();
+        return contatoRepository.list().stream().map(this::contatoToContatoDto).toList();
     }
 
     public ContatoDTO create(ContatoCreateDTO contatoCreateDTO, Integer idPessoa) throws RegraDeNegocioException {
         Pessoa pessoa = pessoaService.listByIdPessoa(idPessoa);
-        log.info("Adicionando contato à pessoa: " + pessoa.getNome());
         contatoCreateDTO.setIdPessoa(idPessoa);
-        Contato contatoEntity = objectMapper.convertValue(contatoCreateDTO, Contato.class);
-        contatoEntity = contatoRepository.create(contatoEntity);
-        ContatoDTO contatoDTO = objectMapper.convertValue(contatoEntity, ContatoDTO.class);
+
+        log.info("Adicionando contato à pessoa: " + pessoa.getNome());
+        ContatoDTO contatoDTO = contatoToContatoDto(
+                contatoRepository.create(contatoCreateDtoToContato(contatoCreateDTO)));
         log.info("Contato adicionado");
+
+        emailService.sendEmailAdicionarContato(pessoa);
+
         return contatoDTO;
     }
 
     public ContatoDTO update(Integer idContato, ContatoCreateDTO contatoAtualizarDTO) throws RegraDeNegocioException {
         Pessoa pessoa = pessoaService.listByIdPessoa(contatoAtualizarDTO.getIdPessoa());
+
         log.info("Atualizando contato de " + pessoa.getNome());
-        Contato contatoEntity = objectMapper.convertValue(contatoAtualizarDTO, Contato.class);
-        contatoEntity = contatoRepository.update(contatoByIdContato(idContato), contatoEntity);
-        ContatoDTO contatoDTO = objectMapper.convertValue(contatoEntity, ContatoDTO.class);
+        ContatoDTO contatoDTO = contatoToContatoDto(
+                contatoRepository.update(contatoByIdContato(idContato), contatoCreateDtoToContato(contatoAtualizarDTO)));
         log.info("Contato atualizado");
+
+        emailService.sendEmailAtualizarContato(pessoa);
+
         return contatoDTO;
     }
 
     public void delete(Integer idContato) throws RegraDeNegocioException {
+        Pessoa pessoa = pessoaService.listByIdPessoa(contatoByIdContato(idContato).getIdPessoa());
+
         log.warn("Deletando contato...");
         contatoRepository.delete(contatoByIdContato(idContato));
         log.info("Contato deletado");
+
+        emailService.sendEmailRemoverContato(pessoa);
     }
 
     public List<ContatoDTO> listByIdPessoa(Integer idPessoa) {
         return contatoRepository.list().stream()
                 .filter(contato -> contato.getIdPessoa().equals(idPessoa))
-                .map(contato -> objectMapper.convertValue(contato, ContatoDTO.class))
-                .toList();
+                .map(this::contatoToContatoDto).toList();
     }
 
 
     public Contato contatoByIdContato(Integer idContato) throws RegraDeNegocioException {
         return contatoRepository.list().stream()
                 .filter(contato -> contato.getIdContato().equals(idContato))
-                .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("O contato informado não existe"));
+                .findFirst().orElseThrow(() -> new RegraDeNegocioException("O contato informado não existe"));
     }
 
-    public void emailDeSaudacao(){
+    public Contato contatoCreateDtoToContato(ContatoCreateDTO contatoCreateDTO) {
+        return objectMapper.convertValue(contatoCreateDTO, Contato.class);
+    }
 
+    public ContatoDTO contatoToContatoDto(Contato contato) {
+        return objectMapper.convertValue(contato, ContatoDTO.class);
     }
 }
