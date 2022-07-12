@@ -22,5 +22,4 @@ public enum TipoEndereco {
                 .findFirst()
                 .get();
     }
-
 }

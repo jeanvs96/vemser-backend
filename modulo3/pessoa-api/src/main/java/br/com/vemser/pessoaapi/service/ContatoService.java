@@ -19,18 +19,12 @@ public class ContatoService {
 
     @Autowired
     private ContatoRepository contatoRepository;
-
     @Autowired
     private PessoaService pessoaService;
-
     @Autowired
     private EmailService emailService;
-
     @Autowired
     private ObjectMapper objectMapper;
-
-    public ContatoService() {
-    }
 
     public List<ContatoDTO> list() {
         return contatoRepository.list().stream().map(this::contatoToContatoDto).toList();

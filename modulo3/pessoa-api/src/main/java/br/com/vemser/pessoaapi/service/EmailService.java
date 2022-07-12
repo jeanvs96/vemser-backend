@@ -26,11 +26,9 @@ import java.util.Map;
 public class EmailService {
 
     private final freemarker.template.Configuration fmConfiguration;
+    private final JavaMailSender emailSender;
     @Value("${spring.mail.username}")
     private String from;
-
-    private final JavaMailSender emailSender;
-
 
     public void sendSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -52,10 +50,6 @@ public class EmailService {
         helper.setSubject("Teste Attachment");
         helper.setText("Chegou a imagem?");
 
-//        File file1 = new File("src/main/resources/imagem.png");
-//        FileSystemResource file = new FileSystemResource(file1);
-//        helper.addAttachment(file1.getName(), file);
-
         ClassLoader classLoader = getClass().getClassLoader();
         File file2 = new File(classLoader.getResource("imagem.png").getFile());
         FileSystemResource file = new FileSystemResource(file2);
@@ -67,7 +61,6 @@ public class EmailService {
     public void sendEmailCriarPessoa(PessoaDTO pessoaDTO) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
-
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
@@ -96,7 +89,6 @@ public class EmailService {
     public void sendEmailAlterarPessoa(PessoaDTO pessoaDTO) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
-
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
@@ -124,7 +116,6 @@ public class EmailService {
     public void sendEmailDeletarPessoa(Pessoa pessoa) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
-
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
@@ -152,7 +143,6 @@ public class EmailService {
     public void sendEmailAdicionarEndereco(Pessoa pessoa) throws RegraDeNegocioException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
-
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
@@ -179,7 +169,6 @@ public class EmailService {
     public void sendEmailAtualizarEndereco(Pessoa pessoa) throws RegraDeNegocioException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
-
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
@@ -206,7 +195,6 @@ public class EmailService {
     public void sendEmailRemoverEndereco(Pessoa pessoa) throws RegraDeNegocioException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
-
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
@@ -284,7 +272,6 @@ public class EmailService {
     public void sendEmailRemoverContato(Pessoa pessoa) throws RegraDeNegocioException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
-
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);

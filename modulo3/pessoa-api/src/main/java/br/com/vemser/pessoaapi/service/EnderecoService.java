@@ -20,10 +20,8 @@ public class EnderecoService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
-
     @Autowired
     private PessoaService pessoaService;
-
     @Autowired
     private EmailService emailService;
     @Autowired

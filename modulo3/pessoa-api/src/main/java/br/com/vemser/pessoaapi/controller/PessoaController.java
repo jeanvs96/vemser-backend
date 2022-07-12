@@ -2,7 +2,6 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.vemser.pessoaapi.config.PropertieReader;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
@@ -23,23 +22,6 @@ public class PessoaController {
 
     @Autowired
     private PessoaService pessoaService;
-
-    @Autowired
-    private PropertieReader propertieReader;
-
-    @Autowired
-    private EmailService emailService;
-
-    @GetMapping("/mail")
-    public String sendMail() throws MessagingException {
-        emailService.sendWithAttachment();
-        return "Enviando email...";
-    }
-
-    @GetMapping("/ambiente")
-    public String getAmbiente() {
-        return propertieReader.getAmbiente();
-    }
 
     @GetMapping
     public ResponseEntity<List<PessoaDTO>> list() {
