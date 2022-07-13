@@ -24,7 +24,7 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
-    @Operation(summary = "listar pessoas", description = "Lista todas as pessoas do banco")
+    @Operation(summary = "Listar pessoas", description = "Lista todas as pessoas do banco de dados")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Retorna a lista de pessoas"),
@@ -37,10 +37,10 @@ public class PessoaController {
         return new ResponseEntity<>(pessoaService.list(), HttpStatus.OK);
     }
 
-    @Operation(summary = "listar pessoas por nome", description = "Lista todas as pessoas do banco com o nome informado")
+    @Operation(summary = "Listar pessoas por nome", description = "Lista todas as pessoas do banco com o nome informado")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna a lista de pessoas pelo parâmetro nome"),
+                    @ApiResponse(responseCode = "200", description = "Retorna a lista de pessoas que atendem ao parâmetro nome"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
@@ -53,7 +53,7 @@ public class PessoaController {
     @Operation(summary = "Adicionar pessoa", description = "Insere pessoa no banco de dados")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna o corpo da pessoa inserida"),
+                    @ApiResponse(responseCode = "200", description = "Retorna o corpo da pessoa inserida, com seu novo ID"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
@@ -63,7 +63,7 @@ public class PessoaController {
         return new ResponseEntity(pessoaService.create(pessoa), HttpStatus.OK);
     }
 
-    @Operation(summary = "Atualizar pessoa", description = "Atualiza pessoa existente no banco de dados")
+    @Operation(summary = "Atualizar pessoa", description = "Atualiza pessoa existente no banco de dados, localizando-a pelo ID")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Retorna o corpo da pessoa atualizada"),
@@ -72,14 +72,16 @@ public class PessoaController {
             }
     )
     @PutMapping("/{idPessoa}")
-    public ResponseEntity<PessoaDTO> update(@PathVariable("idPessoa") Integer id, @Valid @RequestBody PessoaCreateDTO pessoaAtualizarDTO) throws RegraDeNegocioException {
+    public ResponseEntity<PessoaDTO> update(
+            @PathVariable("idPessoa") Integer id, @Valid @RequestBody PessoaCreateDTO pessoaAtualizarDTO)
+            throws RegraDeNegocioException {
         return new ResponseEntity(pessoaService.update(id, pessoaAtualizarDTO), HttpStatus.OK);
     }
 
-    @Operation(summary = "Deletar pessoa", description = "Deleta pessoa existente no banco de dados")
+    @Operation(summary = "Deletar pessoa", description = "Deleta pessoa existente no banco de dados, localizando-a pelo ID")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Status OK"),
+                    @ApiResponse(responseCode = "200", description = "Retorna apena o Status Code da requisição HTTP"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
