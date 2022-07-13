@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Endereco;
-import br.com.vemser.pessoaapi.entity.TipoEndereco;
+import br.com.vemser.pessoaapi.enums.TipoEndereco;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

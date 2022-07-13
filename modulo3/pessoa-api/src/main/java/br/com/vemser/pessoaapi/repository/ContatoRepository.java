@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Contato;
-import br.com.vemser.pessoaapi.entity.TipoContato;
+import br.com.vemser.pessoaapi.enums.TipoContato;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

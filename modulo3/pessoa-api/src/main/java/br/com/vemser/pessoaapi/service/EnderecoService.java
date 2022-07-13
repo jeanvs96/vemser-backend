@@ -1,4 +1,4 @@
-package br.com.vemser.pessoaapi.repository.service;
+package br.com.vemser.pessoaapi.service;
 
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;

@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.entity;
 
+import br.com.vemser.pessoaapi.enums.TipoEndereco;
 import lombok.*;
 
 @Getter
