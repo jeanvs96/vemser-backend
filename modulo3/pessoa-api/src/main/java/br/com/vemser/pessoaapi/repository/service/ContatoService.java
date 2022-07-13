@@ -1,4 +1,4 @@
-package br.com.vemser.pessoaapi.service;
+package br.com.vemser.pessoaapi.repository.service;
 
 import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.vemser.pessoaapi.dto.ContatoDTO;

@@ -1,4 +1,4 @@
-package br.com.vemser.pessoaapi.service;
+package br.com.vemser.pessoaapi.repository.service;
 
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;
@@ -29,18 +29,20 @@ public class EnderecoService {
 
 
     public List<EnderecoDTO> list() {
-        return enderecoRepository.list().stream().map(this::enderecoToEnderecoDTO).toList();
+        return enderecoRepository.list().stream()
+                .map(this::enderecoToEnderecoDTO)
+                .toList();
     }
 
     public EnderecoDTO create(EnderecoCreateDTO enderecoCreateDTO, Integer idPessoa) throws RegraDeNegocioException {
         Pessoa pessoa = pessoaService.listByIdPessoa(idPessoa);
         enderecoCreateDTO.setIdPessoa(pessoa.getIdPessoa());
-
         log.info("Adicionando endereco...");
+
         EnderecoDTO enderecoDTO = enderecoToEnderecoDTO(
                 enderecoRepository.create(enderecoCreateDtoToEndereco(enderecoCreateDTO)));
-        log.info("Endereço adicionado");
 
+        log.info("Endereço adicionado");
         emailService.sendEmailAdicionarEndereco(pessoa);
 
         return enderecoDTO;
@@ -74,8 +76,10 @@ public class EnderecoService {
     }
 
     public List<EnderecoDTO> listByIdPessoa(Integer idPessoa) {
-        return enderecoRepository.list().stream().filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
-                .toList().stream().map(this::enderecoToEnderecoDTO).toList();
+        return enderecoRepository.list().stream()
+                .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
+                .map(this::enderecoToEnderecoDTO)
+                .toList();
     }
 
     public Endereco recuperarByIdEndereco(Integer idEndereco) throws RegraDeNegocioException {
