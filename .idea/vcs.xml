@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modulo3/modulo3.2/vemser-pessoa-api-jean" vcs="Git" />
   </component>
 </project>
