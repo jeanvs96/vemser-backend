@@ -60,5 +60,4 @@ public class PessoaDadosPessoaisCreateDTO {
     @Schema(description = "Número do título de eleitor da pessoa")
     @NotBlank
     private String tituloEleitor;
-
 }
