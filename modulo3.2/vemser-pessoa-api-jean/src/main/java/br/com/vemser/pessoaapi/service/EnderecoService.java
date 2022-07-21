@@ -37,10 +37,8 @@ public class EnderecoService {
         log.info("Adicionando endereco...");
 
         PessoaEntity pessoa = pessoaService.listByIdPessoa(idPessoa);
-        Set<PessoaEntity> pessoaEntities = new HashSet<>();
-        pessoaEntities.add(pessoa);
         EnderecoEntity enderecoEntity = enderecoCreateDtoToEndereco(enderecoCreateDTO);
-        enderecoEntity.setPessoaEntities(pessoaEntities);
+        enderecoEntity.setPessoaEntities(Set.of(pessoa));
         EnderecoDTO enderecoDTO = enderecoToEnderecoDTO(enderecoRepository.save(enderecoEntity));
 
         log.info("Endereço adicionado");
