@@ -1,6 +1,7 @@
 package br.com.vemser.pessoaapi.dto;
 
 import br.com.vemser.pessoaapi.entity.PetEntity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 

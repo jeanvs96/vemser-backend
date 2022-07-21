@@ -3,6 +3,7 @@ package br.com.vemser.pessoaapi.controller;
 import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.dto.PessoaRelatorioDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,6 +56,24 @@ public class PessoaController {
     @GetMapping("/listar-com-pet")
     public ResponseEntity<List<PessoaDTO>> listPessoaAndPet(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listPessoaAndPet(idPessoa), HttpStatus.OK);
+    }
+
+    @Response
+    @Operation(summary = "Listar pessoa completa",
+            description = "Lista todas as pessoas do banco de dados, com seus respectivos endereços, contatos e pets. " +
+                    "Caso seja especificada uma pessoa (por Query Param), traz somente as informações referentes à ela")
+    @GetMapping("/pessoa-completo")
+    public ResponseEntity<List<PessoaDTO>> listPessoaCompleta(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listPessoaCompleta(idPessoa), HttpStatus.OK);
+    }
+
+    @Response
+    @Operation(summary = "Relatório das pessoas",
+            description = "Lista todas as pessoas do banco de dados, com seus respectivos id, nome, email, número(contato), " +
+                    "cep, cidade, estado, pais e nome de seu pet(caso possua).")
+    @GetMapping("/relatorio")
+    public ResponseEntity<List<PessoaRelatorioDTO>> relatorioPessoa(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.relatorioPessoa(idPessoa), HttpStatus.OK);
     }
 
     @Operation(summary = "Listar pessoa por cpf", description = "Lista uma pessoa por cpf")

@@ -51,6 +51,33 @@ public class PessoaService {
         }
     }
 
+    public List<PessoaDTO> listPessoaCompleta(Integer idPessoa) {
+        if (idPessoa == null) {
+            return pessoaRepository.findAll().stream()
+                    .map(pessoaEntity -> {
+                        PessoaDTO pessoaDTO = entityToPessoaDTO(pessoaEntity);
+                        pessoaDTO.setEnderecoDTOS(pessoaEntity.getEnderecoEntities().stream()
+                                .map(this::enderecoToEnderecoDTO)
+                                .toList());
+                        pessoaDTO.setContatoDTOS(pessoaEntity.getContatoEntities().stream()
+                                .map(this::contatoToContatoDto).toList());
+                        pessoaDTO.setPetDTO(petToPetDTO(pessoaEntity.getPetEntity()));
+                        return pessoaDTO;
+                    }).toList();
+        } else {
+            return pessoaRepository.findById(idPessoa)
+                    .map(pessoaEntity -> {
+                        PessoaDTO pessoaDTO = entityToPessoaDTO(pessoaEntity);
+                        pessoaDTO.setEnderecoDTOS(pessoaEntity.getEnderecoEntities().stream()
+                                .map(this::enderecoToEnderecoDTO).toList());
+                        pessoaDTO.setContatoDTOS(pessoaEntity.getContatoEntities().stream()
+                                .map(this::contatoToContatoDto).toList());
+                        pessoaDTO.setPetDTO(petToPetDTO(pessoaEntity.getPetEntity()));
+                        return pessoaDTO;
+                    }).stream().toList();
+        }
+    }
+
     public List<PessoaDTO> listPessoaAndContato(Integer idPessoa) {
         if (idPessoa == null) {
             return pessoaRepository.findAll().stream()
@@ -87,6 +114,10 @@ public class PessoaService {
                         return pessoaDTO;
                     }).stream().toList();
         }
+    }
+
+    public List<PessoaRelatorioDTO> relatorioPessoa(Integer idPessoa) {
+        return pessoaRepository.relatorioPessoa(idPessoa);
     }
 
     public List<PessoaDTO> listByContainsNome(String nome) {

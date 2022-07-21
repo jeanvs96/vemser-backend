@@ -10,11 +10,11 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+@Entity(name = "PROFESSOR")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "PROFESSOR")
 public class ProfessorEntity {
 
     @EmbeddedId
