@@ -147,6 +147,7 @@ public class PessoaService {
         PessoaEntity pessoaEntity = pessoaCreateDtoToPessoaEntity(pessoaAtualizarDTO);
         pessoaEntity.setIdPessoa(idPessoa);
         pessoaEntity.setEnderecoEntities(pessoaRecuperada.getEnderecoEntities());
+
         PessoaDTO pessoaDTO = entityToPessoaDTO(pessoaRepository.save(pessoaEntity));
 
         log.info("Dados de " + pessoaDTO.getNome() + " atualizados no banco de dados");

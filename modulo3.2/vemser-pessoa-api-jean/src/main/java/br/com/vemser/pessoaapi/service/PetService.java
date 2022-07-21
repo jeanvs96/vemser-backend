@@ -7,6 +7,7 @@ import br.com.vemser.pessoaapi.dto.PetDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.entity.PetEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.vemser.pessoaapi.repository.PetRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,8 @@ public class PetService {
     private final PetRepository petRepository;
 
     private final PessoaService pessoaService;
+
+    private final PessoaRepository pessoaRepository;
 
     private final ObjectMapper objectMapper;
 
@@ -56,7 +59,7 @@ public class PetService {
         petRecuperado.setPessoaEntity(pessoaService.listByIdPessoa(petAtualizarDTO.getIdPessoa()));
         petRecuperado.setIdPessoa(petAtualizarDTO.getIdPessoa());
         pessoaRecuperada.setPetEntity(petRecuperado);
-        pessoaService.update(pessoaRecuperada.getIdPessoa(), objectMapper.convertValue(pessoaRecuperada, PessoaCreateDTO.class));
+        pessoaRepository.save(pessoaRecuperada);
 
 
         if (!pessoaRecuperada.getIdPessoa().equals(pessoaEntity.getIdPessoa())) {
