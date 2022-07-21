@@ -59,7 +59,7 @@ public class PetService {
         petRecuperado.setPessoaEntity(pessoaService.listByIdPessoa(petAtualizarDTO.getIdPessoa()));
         petRecuperado.setIdPessoa(petAtualizarDTO.getIdPessoa());
         pessoaRecuperada.setPetEntity(petRecuperado);
-        pessoaRepository.save(pessoaRecuperada);
+        pessoaService.salvar(pessoaRecuperada);
 
 
         if (!pessoaRecuperada.getIdPessoa().equals(pessoaEntity.getIdPessoa())) {

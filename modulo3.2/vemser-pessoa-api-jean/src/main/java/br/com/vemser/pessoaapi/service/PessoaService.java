@@ -165,6 +165,10 @@ public class PessoaService {
         emailService.sendEmailDeletarPessoa(pessoaDeletar);
     }
 
+    public void salvar(PessoaEntity pessoaEntity) {
+        pessoaRepository.save(pessoaEntity);
+    }
+
     public List<PessoaDTO> listByName(String nome) {
         return pessoaRepository.findAll()
                 .stream()
