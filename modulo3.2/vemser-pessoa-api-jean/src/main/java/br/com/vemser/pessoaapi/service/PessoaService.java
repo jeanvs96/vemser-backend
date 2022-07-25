@@ -116,8 +116,8 @@ public class PessoaService {
         }
     }
 
-    public List<PessoaRelatorioDTO> relatorioPessoa(Integer idPessoa) {
-        return pessoaRepository.relatorioPessoa(idPessoa);
+    public List<PessoaRelatorioDTO> relatorioPessoa() {
+        return pessoaRepository.relatorioPessoa();
     }
 
     public List<PessoaDTO> listByContainsNome(String nome) {

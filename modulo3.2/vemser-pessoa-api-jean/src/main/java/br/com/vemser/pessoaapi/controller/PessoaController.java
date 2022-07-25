@@ -72,8 +72,8 @@ public class PessoaController {
             description = "Lista todas as pessoas do banco de dados, com seus respectivos id, nome, email, número(contato), " +
                     "cep, cidade, estado, pais e nome de seu pet(caso possua).")
     @GetMapping("/relatorio")
-    public ResponseEntity<List<PessoaRelatorioDTO>> relatorioPessoa(@RequestParam(required = false) Integer idPessoa) {
-        return new ResponseEntity<>(pessoaService.relatorioPessoa(idPessoa), HttpStatus.OK);
+    public ResponseEntity<List<PessoaRelatorioDTO>> relatorioPessoa() {
+        return new ResponseEntity<>(pessoaService.relatorioPessoa(), HttpStatus.OK);
     }
 
     @Operation(summary = "Listar pessoa por cpf", description = "Lista uma pessoa por cpf")
