@@ -1,9 +1,6 @@
 package br.com.vemser.pessoaapi.security;
 
-import br.com.vemser.pessoaapi.entity.UsuarioEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.FilterChain;
@@ -14,10 +11,8 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
-
     protected static final String BEARER = "Bearer ";
     private final TokenService tokenService;
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -36,6 +31,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         if (token == null) {
             return null;
         }
+
         return token.replace(BEARER, "");
     }
 }
