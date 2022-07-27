@@ -23,8 +23,9 @@ public class SecurityConfiguration {
         http.headers().frameOptions().disable().and()
                 .cors().and()
                 .csrf().disable()
-                .authorizeHttpRequests((authz) ->
-                        authz.antMatchers("/", "/auth")
+                .authorizeHttpRequests(
+                        (auth) -> auth
+                                .antMatchers("/", "/auth")
                                 .permitAll()
                                 .anyRequest().authenticated());
         http.addFilterBefore(new TokenAuthenticationFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
@@ -38,13 +39,17 @@ public class SecurityConfiguration {
                 "/swagger-resources/**",
                 "/swagger-ui/**");
     }
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                // FIXME adicionar cors (mapping, methods e headers)
+                registry.addMapping("/**")
+                        .allowedMethods("*")
+                        .exposedHeaders("Authorization");
             }
         };
     }
 }
+
