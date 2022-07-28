@@ -1,7 +1,6 @@
 package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.LoginDTO;
-import br.com.vemser.pessoaapi.dto.UsuarioCreateDTO;
 import br.com.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.vemser.pessoaapi.security.TokenService;
 import br.com.vemser.pessoaapi.service.UsuarioService;
@@ -45,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<String> createUser(@RequestBody @Valid UsuarioCreateDTO usuarioCreateDTO) {
-        return new ResponseEntity<>(usuarioService.saveUsuario(usuarioCreateDTO).getLogin(), HttpStatus.OK);
+    public ResponseEntity<String> createUser(@RequestBody @Valid LoginDTO loginDTO) {
+        return new ResponseEntity<>(usuarioService.saveUsuario(loginDTO).getLogin(), HttpStatus.OK);
     }
 }
