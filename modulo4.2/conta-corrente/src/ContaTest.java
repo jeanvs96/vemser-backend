@@ -6,7 +6,7 @@ public class ContaTest {
     //CONTA CORRENTE
 
     @Test
-    public void saqueContaCorrente() {
+    public void deveTestarSaqueContaCorrenteEVerificarSaldoComSucesso() {
         ContaCorrente contaCorrente = contaCorrenteFactory();
 
         boolean saque = contaCorrente.sacar(500);
@@ -16,16 +16,17 @@ public class ContaTest {
     }
 
     @Test
-    public void saqueContaCorrenteSemSaldo() {
+    public void deveTestarSaqueContaCorrenteSemSaldoEVerificarSaldoComSucesso() {
         ContaCorrente contaCorrente = contaCorrenteFactory();
 
         boolean saque = contaCorrente.sacar(5000);
 
         Assertions.assertFalse(saque);
+        Assertions.assertEquals(2000.0, contaCorrente.getSaldo());
     }
 
     @Test
-    public void transferenciaContaCorrente() {
+    public void deveTestarTransferenciaContaCorrenteEVerificarSaldoComSucesso() {
         ContaCorrente contaCorrente = contaCorrenteFactory();
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
 
@@ -37,17 +38,18 @@ public class ContaTest {
     }
 
     @Test
-    public void transferenciaContaCorrenteSemSaldo() {
+    public void deveTestarTransferenciaContaCorrenteSemSaldoEVerificarSaldoComSucesso() {
         ContaCorrente contaCorrente = contaCorrenteFactory();
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
 
         boolean transferencia = contaCorrente.transferir(contaPoupanca, 5000.0);
 
         Assertions.assertFalse(transferencia);
+        Assertions.assertEquals(2000.0, contaCorrente.getSaldo());
     }
 
     @Test
-    public void depositoContaCorrente() {
+    public void deveTestarDepositoContaCorrenteEVerificarSaldoComSucesso() {
         ContaCorrente contaCorrente = contaCorrenteFactory();
 
         boolean saque = contaCorrente.depositar(500);
@@ -57,12 +59,13 @@ public class ContaTest {
     }
 
     @Test
-    public void depositoContaCorrenteSaldoNegativo() {
+    public void deveTestarDepositoContaCorrenteSaldoNegativoEVerificarSaldoComSucesso() {
         ContaCorrente contaCorrente = contaCorrenteFactory();
 
         boolean saque = contaCorrente.depositar(-300);
 
         Assertions.assertFalse(saque);
+        Assertions.assertEquals(2000.0, contaCorrente.getSaldo());
     }
 
 
@@ -70,7 +73,7 @@ public class ContaTest {
 
 
     @Test
-    public void saqueContaPoupanca() {
+    public void deveTestarSaqueContaPoupancaEVerificarSaldoComSucesso() {
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
         contaPoupanca.creditarTaxa();
 
@@ -81,16 +84,17 @@ public class ContaTest {
     }
 
     @Test
-    public void saqueContaPoupancaSemSaldo() {
+    public void deveTestarSaqueContaPoupancaSemSaldoEVerificarSaldoComSucesso() {
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
 
         boolean saque = contaPoupanca.sacar(3000);
 
         Assertions.assertFalse(saque);
+        Assertions.assertEquals(2000.0, contaPoupanca.getSaldo());
     }
 
     @Test
-    public void transferenciaContaPoupanca() {
+    public void deveTestarTransferenciaContaPoupancaEVerificarSaldoComSucesso() {
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
         ContaPagamento contaPagamento = contaPagamentoFactory();
 
@@ -102,17 +106,18 @@ public class ContaTest {
     }
 
     @Test
-    public void transferenciaContaPoupancaSemSaldo() {
+    public void deveTestarTransferenciaContaPoupancaSemSaldoEVerificarSaldoComSucesso() {
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
         ContaPagamento contaPagamento = contaPagamentoFactory();
 
         boolean transferencia = contaPoupanca.transferir(contaPagamento, 5000.0);
 
         Assertions.assertFalse(transferencia);
+        Assertions.assertEquals(2000.0, contaPoupanca.getSaldo());
     }
 
     @Test
-    public void depositoContaPoupanca() {
+    public void deveTestarDepositoContaPoupancaEVerificarSaldoComSucesso() {
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
 
         boolean saque = contaPoupanca.depositar(500);
@@ -122,12 +127,13 @@ public class ContaTest {
     }
 
     @Test
-    public void depositoContaPoupancaSaldoNegativo() {
+    public void deveTestarDepositoContaPoupancaSaldoNegativoEVerificarSaldoComSucesso() {
         ContaPoupanca contaPoupanca = contaPoupancaFactory();
 
         boolean saque = contaPoupanca.depositar(-300);
 
         Assertions.assertFalse(saque);
+        Assertions.assertEquals(2000.0, contaPoupanca.getSaldo());
     }
 
 
@@ -135,7 +141,7 @@ public class ContaTest {
 
 
     @Test
-    public void saqueContaPagamento() {
+    public void deveTestarSaqueContaPagamentoEVerificarSaldoComSucesso() {
         ContaPagamento contaPagamento = contaPagamentoFactory();
 
         boolean saque = contaPagamento.sacar(100.0);
@@ -145,16 +151,17 @@ public class ContaTest {
     }
 
     @Test
-    public void saqueContaPagamentoSemSaldo() {
+    public void deveTestarSaqueContaPagamentoSemSaldoEVerificarSaldoComSucesso() {
         ContaPagamento contaPagamento = contaPagamentoFactory();
 
         boolean saque = contaPagamento.sacar(3000);
 
         Assertions.assertFalse(saque);
+        Assertions.assertEquals(2000.0, contaPagamento.getSaldo());
     }
 
     @Test
-    public void transferenciaContaPagamento() {
+    public void deveTestarTransferenciaContaPagamentoEVerificarSaldoComSucesso() {
         ContaPagamento contaPagamento = contaPagamentoFactory();
         ContaCorrente contaCorrente = contaCorrenteFactory();
 
@@ -166,17 +173,18 @@ public class ContaTest {
     }
 
     @Test
-    public void transferenciaContaPagamentoSemSaldo() {
+    public void deveTestarTransferenciaContaPagamentoSemSaldoEVerificarSaldoComSucesso() {
         ContaPagamento contaPagamento = contaPagamentoFactory();
         ContaCorrente contaCorrente = contaCorrenteFactory();
 
         boolean transferencia = contaPagamento.transferir(contaCorrente, 5000.0);
 
         Assertions.assertFalse(transferencia);
+        Assertions.assertEquals(2000.0, contaPagamento.getSaldo());
     }
 
     @Test
-    public void depositoContaPagamento() {
+    public void deveTestarDepositoContaPagamentoEVerificarSaldoComSucesso() {
         ContaPagamento contaPagamento = contaPagamentoFactory();
 
         boolean saque = contaPagamento.depositar(500);
@@ -186,7 +194,7 @@ public class ContaTest {
     }
 
     @Test
-    public void depositoContaPagamentoSaldoNegativo() {
+    public void deveTestarDepositoContaPagamentoSaldoNegativoEVerificarSaldoComSucesso() {
         ContaPagamento contaPagamento = contaPagamentoFactory();
 
         boolean saque = contaPagamento.depositar(-300);
