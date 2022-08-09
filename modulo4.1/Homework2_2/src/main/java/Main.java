@@ -106,12 +106,9 @@ public class Main {
 
         //UPDATE
         //1
-        animal.updateOne(Filters.eq("_id", 3), new Document("$set", new Document("pelagem", 1)));
+        animal.updateOne(Filters.eq("_id", 3), new Document("$set", new Document("pelagem", 1).append("idade", 6)));
 
         //2
-        animal.updateOne(Filters.eq("_id", 3), new Document("$set", new Document("idade", 6)));
-
-        //3
         animal.updateMany(Filters.eq("tipo", "Gato"), new Document("$set", new Document("pelagem", 2)));
 
 
