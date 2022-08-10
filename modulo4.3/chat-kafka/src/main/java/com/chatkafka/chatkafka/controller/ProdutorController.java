@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/sensor-veiculo")
+@RequestMapping("/chat")
 @RequiredArgsConstructor
 @Validated
 public class ProdutorController {
